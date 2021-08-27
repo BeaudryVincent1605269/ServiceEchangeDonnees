@@ -2,7 +2,7 @@ const http = require('http'); // Using ou #include
 
 const server = http.createServer((request,response) => {
 
-    response.statusCode = 200;
+    response.statusCode = 200; // C'est Ok!
     response.setHeader('Content-Type', 'text/plain');
     response.end('Bon matin premier serveur.');
     console.log(request);
