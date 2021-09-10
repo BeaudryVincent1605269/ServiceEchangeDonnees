@@ -5,13 +5,14 @@ import methodMiddleware from './middlewares/method.js';
 import errorMiddleware from './middlewares/errors.js';
 
 import planetsRoutes from './routes/planets.routes.js';
+import elementsRoutes from './routes/elements.routes.js';
 
 const app = express();
 
 app.use(express.json());
 app.use(methodMiddleware);
-app.use(planetsRoutes);
-
+app.use('/planets', planetsRoutes);
+app.use('/elements', elementsRoutes);
 app.get('/', (req, res) => {
     res.status(777);
     res.set('Content-Type', 'text/plain');

@@ -7,9 +7,32 @@ const router = express.Router();
 
 class PlanetsRoutes {
     constructor() {
-        router.get('/planets', this.getAll);
-        router.get('/planets/:idPlanet', this.getOne);
+        router.get('/', this.getAll);
+        router.get('/:idPlanet', this.getOne);
         router.post('/planets', this.post);
+        router.delete('/:idPlanet', this.delete);
+        router.patch('/:idPalnet', this.patch)
+        router.put('/:idPlanet', this.put);
+    }
+
+    patch(req, res, next) {
+        return next(HttpError.NotImplemented());
+    }
+
+    put(req, res, next) {
+        return next(HttpError.MethodNotAllowed());
+    }
+
+    delete(req, res, next) {
+        const index = PLANETS.findIndex(p => p.id == req.params.idPlanet); // params est une information passer dans l'url
+
+        if (index === -1) {
+            return next(HttpError.NotFound(`LA planète avec l'identifiant ${req.params.idPlanet} n'existe pas`))
+        } else {
+            PLANETS.splice(index, 1);
+
+            res.status(204).end();
+        }
     }
 
     post(req, res, next) {
@@ -20,7 +43,8 @@ class PlanetsRoutes {
             //Doublon del puguino (planet)
             return next(HttpError.Conflict(`La planète avec l'id ${newPlanet.id} existe déjà`));
         } else {
-
+            PLANETS.push(newPlanet);
+            res.status(HttpStatus.CREATED).json(newPlanet);
         }
 
         PLANETS.push(newPlanet);
