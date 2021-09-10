@@ -1,7 +1,16 @@
 import dayjs from 'dayjs';
 import express from 'express';
 
+import methodMiddleware from './middlewares/method.js';
+import errorMiddleware from './middlewares/errors.js';
+
+import planetsRoutes from './routes/planets.routes.js';
+
 const app = express();
+
+app.use(express.json());
+app.use(methodMiddleware);
+app.use(planetsRoutes);
 
 app.get('/', (req, res) => {
     res.status(777);
@@ -70,4 +79,5 @@ app.get('/date', (req, res) => {
 
 })
 
+app.use(errorMiddleware);
 export default app;
