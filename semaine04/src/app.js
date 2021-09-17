@@ -17,7 +17,7 @@ const app = express();
 app.use(express.json());
 app.use(methodMiddleware);
 app.use('/planets', planetsRoutes);
-app.use("/elements", elementsRoutes);
+app.use('/elements', elementsRoutes);
 
 
 app.use(errorMiddleware);
