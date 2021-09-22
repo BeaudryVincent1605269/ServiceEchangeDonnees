@@ -13,7 +13,7 @@ class PlanetsRoutes {
         router.get('/:idPlanet', this.getOne);
         router.post('/', this.post);
         router.delete('/:idPlanet', this.delete);
-        router.patch('/:idPalnet', this.patch)
+        router.patch('/:idPlanet', this.patch)
         router.put('/:idPlanet', this.put);
     }
 

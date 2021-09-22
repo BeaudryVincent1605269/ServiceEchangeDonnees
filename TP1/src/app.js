@@ -6,8 +6,8 @@ import database from './libs/database.js';
 import methodMiddleware from './middlewares/method.js';
 import errorMiddleware from './middlewares/errors.js';
 
-import planetsRoutes from './routes/planets.routes.js';
-import elementsRoutes from './routes/elements.routes.js';
+import observationsRoutes from './routes/observations.routes.js';
+
 
 database();
 
@@ -16,8 +16,8 @@ const app = express();
 
 app.use(express.json());
 app.use(methodMiddleware);
-app.use('/planets', planetsRoutes);
-app.use('/elements', elementsRoutes);
+app.use('/observations', observationsRoutes);
+
 
 
 app.use(errorMiddleware);
