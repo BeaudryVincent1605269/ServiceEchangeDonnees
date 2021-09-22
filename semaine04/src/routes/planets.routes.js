@@ -11,7 +11,7 @@ class PlanetsRoutes {
     constructor() {
         router.get('/', this.getAll);
         router.get('/:idPlanet', this.getOne);
-        router.post('/planets', this.post);
+        router.post('/', this.post);
         router.delete('/:idPlanet', this.delete);
         router.patch('/:idPalnet', this.patch)
         router.put('/:idPlanet', this.put);
@@ -37,19 +37,24 @@ class PlanetsRoutes {
         }
     }
 
-    post(req, res, next) {
+    async post(req, res, next) {
         const newPlanet = req.body;
 
-        const planet = PLANETS.find(p => p.id == newPlanet.id);
-        if (planet) {
-            //Doublon del puguino (planet)
-            return next(HttpError.Conflict(`La planète avec l'id ${newPlanet.id} existe déjà`));
-        } else {
-            PLANETS.push(newPlanet);
-            res.status(HttpStatus.CREATED).json(newPlanet);
+        try {
+            let planetAdded = await planetRepository.create(newPlanet);
+            planetAdded = planetAdded.toObject({ getters: false, virtuals: false });
+            planetAdded = planetRepository.transform(planetAdded);
+
+
+
+            res.status(HttpStatus.CREATED).json(planetAdded);
+        } catch (err) {
+            return next(err);
         }
 
-        PLANETS.push(newPlanet);
+
+
+
     }
 
     async getAll(req, res, next) {
@@ -60,8 +65,28 @@ class PlanetsRoutes {
             filter.discoveredBy = req.query.explorer;
         }
 
+        //Validation des parametres de la request
+        const transformOptions = {};
+        if (req.query.unit) {
+            const unit = req.query.unit;
+            if (unit === 'c') {
+                transformOptions.unit = unit;
+            } else {
+                return next(HttpError.BadRequest('Le paramètre unit doit avoir la valeur c pour Celsius'));
+            }
+        }
+
+
+
         try {
-            const planets = await planetRepository.retrieveAll(filter);
+            let planets = await planetRepository.retrieveAll(filter);
+
+            planets = planets.map(p => {
+                p = p.toObject({ getter: false, virtuals: false });
+                p = planetRepository.transform(p, transformOptions);
+                return p;
+            });
+
             res.status(200).json(planets);
         } catch (err) {
             return next(err);
@@ -73,8 +98,18 @@ class PlanetsRoutes {
         const idPlanet = req.params.idPlanet;
 
 
+        const transformOptions = {};
+        if (req.query.unit) {
+            const unit = req.query.unit;
+            if (unit === 'c') {
+                transformOptions.unit = unit;
+            } else {
+                return next(HttpError.BadRequest('Le paramètre unit doit avoir la valeur c pour Celsius'));
+            }
+        }
+
         try {
-            const planet = await planetRepository.retrieveById(idPlanet);
+            let planet = await planetRepository.retrieveById(idPlanet);
             // let planets;
             // for (let p of PLANETS) {    // foreach
             //     if (p.id == idPlanet) { // J'ai trouvé la planet  // == égalité === égalité et égalité de type ex int string etc
@@ -86,8 +121,15 @@ class PlanetsRoutes {
             // const planet = PLANETS.filter(p => p.id == idPlanet); // Filter fait une boucle jusqua temps que le p est égale au id
             //const planet = PLANETS.find(p => p.id == idPlanet); // Find en trouve 1 et arrete
 
+
+            //Validation des parametres de la request
+
+
+
             //1.  J'ai une planete
             if (planet) {
+                planet = planet.toObject({ getters: false, virtuals: false });
+                planet = planetRepository.transform(planet, transformOptions);
                 res.status(200).json(planet);
             }
             else {
