@@ -1,0 +1,292 @@
+[
+    {
+        "location": {
+            "sation": "MARCOEX",
+            "coord": {
+                "lon": -222.55,
+                "lat": 35.35
+            }
+        },
+        "temperature": 18,
+        "pressure": 1111,
+        "humidity": 0.69,
+        "feelslike": 18,
+        "uvIndex": 5,
+        "wind": {
+            "speed": 12,
+            "degree": 165
+        },
+        "clouds": {
+            "cloudcover": 0.75
+        },
+        "observationDate": "2021-09-22T14:37:52.934000Z",
+        "hexMatrix": [
+            "0xA2",
+            "0xC4",
+            "0xE2",
+            "0x12",
+            "0xB6"
+        ]
+    },
+    {
+        "location": {
+            "sation": "CEDKOOL",
+            "coord": {
+                "lon": 555.55,
+                "lat": -65.35
+            }
+        },
+        "temperature": 255,
+        "pressure": 2300,
+        "humidity": 1.50,
+        "feelslike": 300,
+        "uvIndex": 60,
+        "wind": {
+            "speed": 150,
+            "degree": 250
+        },
+        "clouds": {
+            "cloudcover": 0.75
+        },
+        "observationDate": "2025-09-22T19:37:52.934000Z",
+        "hexMatrix": [
+            "0xB2",
+            "0xE4",
+            "0xE2",
+            "0xA2",
+            "0xB8"
+        ]
+    },
+    {
+        "location": {
+            "sation": "MIKCOMMIT",
+            "coord": {
+                "lon": -922.69,
+                "lat": -759.95
+            }
+        },
+        "temperature": 420,
+        "pressure": 789,
+        "humidity": 0.99,
+        "feelslike": 800,
+        "uvIndex": 6,
+        "wind": {
+            "speed": 66,
+            "degree": 65
+        },
+        "clouds": {
+            "cloudcover": 0.15
+        },
+        "observationDate": "2026-09-22T14:37:52.934000Z",
+        "hexMatrix": [
+            "0xE2",
+            "0x14",
+            "0xB2",
+            "0xA2",
+            "0xD6"
+        ]
+    },
+    {
+        "location": {
+            "sation": "BENNUAGEUX",
+            "coord": {
+                "lon": 662.69,
+                "lat": -119.95
+            }
+        },
+        "temperature": 20,
+        "pressure": 89,
+        "humidity": 0.49,
+        "feelslike": 90,
+        "uvIndex": 4,
+        "wind": {
+            "speed": 96,
+            "degree": 18
+        },
+        "clouds": {
+            "cloudcover": 0.99
+        },
+        "observationDate": "2026-01-01T14:37:52.934000Z",
+        "hexMatrix": [
+            "0xA2",
+            "0xB4",
+            "0xC2",
+            "0xD2",
+            "0xE6"
+        ]
+    },
+    {
+        "location": {
+            "sation": "LETPEST",
+            "coord": {
+                "lon": 92.69,
+                "lat": -59.95
+            }
+        },
+        "temperature": 400,
+        "pressure": 89,
+        "humidity": 0.19,
+        "feelslike": 400,
+        "uvIndex": 5,
+        "wind": {
+            "speed": 166,
+            "degree": 5
+        },
+        "clouds": {
+            "cloudcover": 0.55
+        },
+        "observationDate": "1995-12-18T14:14:52.934000Z",
+        "hexMatrix": [
+            "0xD2",
+            "0xE4",
+            "0xA2",
+            "0xA4",
+            "0xD6"
+        ]
+    },
+    {
+        "location": {
+            "sation": "PINGUINO",
+            "coord": {
+                "lon": 22.69,
+                "lat": -959.55
+            }
+        },
+        "temperature": -60,
+        "pressure": 89,
+        "humidity": 0.49,
+        "feelslike": -60,
+        "uvIndex": 7,
+        "wind": {
+            "speed": 56,
+            "degree": 255
+        },
+        "clouds": {
+            "cloudcover": 0.65
+        },
+        "observationDate": "2024-12-23T14:37:52.934000Z",
+        "hexMatrix": [
+            "0xE5",
+            "0xB5",
+            "0xE2",
+            "0xA2",
+            "0xB6"
+        ]
+    },
+    {
+        "location": {
+            "sation": "CSHARP",
+            "coord": {
+                "lon": 123.45,
+                "lat": -987.65
+            }
+        },
+        "temperature": 90,
+        "pressure": 85,
+        "humidity": 0.89,
+        "feelslike": 92,
+        "uvIndex": 8,
+        "wind": {
+            "speed": 256,
+            "degree": 355
+        },
+        "clouds": {
+            "cloudcover": 0.55
+        },
+        "observationDate": "2016-08-02T14:37:52.934000Z",
+        "hexMatrix": [
+            "0xE3",
+            "0x13",
+            "0xB3",
+            "0xA3",
+            "0xD3"
+        ]
+    },
+    {
+        "location": {
+            "sation": "KAMEHAMEHA",
+            "coord": {
+                "lon": -22.60,
+                "lat": 759.95
+            }
+        },
+        "temperature": -420,
+        "pressure": 789,
+        "humidity": 0.99,
+        "feelslike": -800,
+        "uvIndex": 1,
+        "wind": {
+            "speed": 656,
+            "degree": 165
+        },
+        "clouds": {
+            "cloudcover": 0.95
+        },
+        "observationDate": "2026-09-22T14:37:52.934000Z",
+        "hexMatrix": [
+            "0x12",
+            "0x14",
+            "0x19",
+            "0x13",
+            "0x16"
+        ]
+    },
+    {
+        "location": {
+            "sation": "POGO59",
+            "coord": {
+                "lon": -2.69,
+                "lat": 959.95
+            }
+        },
+        "temperature": -20,
+        "pressure": 89,
+        "humidity": 0.99,
+        "feelslike": -20,
+        "uvIndex": 1,
+        "wind": {
+            "speed": 156,
+            "degree": 115
+        },
+        "clouds": {
+            "cloudcover": 0.65
+        },
+        "observationDate": "2026-09-22T14:37:52.934000Z",
+        "hexMatrix": [
+            "0xB2",
+            "0xB4",
+            "0xB2",
+            "0xB2",
+            "0xD6"
+        ]
+    },
+    {
+        "location": {
+            "sation": "HELLOWORLD",
+            "coord": {
+                "lon": 900.69,
+                "lat": -500.95
+            }
+        },
+        "temperature": -120,
+        "pressure": 189,
+        "humidity": 0.59,
+        "feelslike": -120,
+        "uvIndex": 9,
+        "wind": {
+            "speed": 56,
+            "degree": 295
+        },
+        "clouds": {
+            "cloudcover": 0.45
+        },
+        "observationDate": "2025-01-12T14:37:52.934000Z",
+        "hexMatrix": [
+            "0xB2",
+            "0xC4",
+            "0xD2",
+            "0xC2",
+            "0xC6"
+        ]
+    }
+]

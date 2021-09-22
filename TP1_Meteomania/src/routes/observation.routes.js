@@ -1,9 +1,9 @@
 import express from 'express';
 import HttpError from 'http-errors';
 import HttpStatus from 'http-status';
-import OBSERVATIONS from '../data/observations.js';
+import OBSERVATIONS from '../data/observations.js.js';
 
-import planetRepository from '../repositories/planet.repository.js';
+import planetRepository from '../repositories/observation.repository.js';
 
 const router = express.Router();
 
