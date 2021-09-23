@@ -6,7 +6,7 @@ import database from './libs/database.js';
 import methodMiddleware from './middlewares/method.js';
 import errorMiddleware from './middlewares/errors.js';
 
-import observationsRoutes from './routes/observations.routes.js';
+import observationsRoutes from './routes/observation.routes.js';
 
 
 database();

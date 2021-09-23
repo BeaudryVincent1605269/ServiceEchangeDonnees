@@ -6,3 +6,6 @@ class ObservationRepository {
 
 
 }
+
+
+export default new ObservationRepository();
