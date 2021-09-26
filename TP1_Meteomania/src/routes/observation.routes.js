@@ -10,6 +10,7 @@ const router = express.Router();
 class ObservationsRoutes {
     constructor() {
         router.get('/', this.getAll);
+        router.get('/:stationName', this.getAll);
         router.get('/:idObservation', this.getOne);
         router.post('/', this.post);
         router.delete('/:idObservation', this.delete);
@@ -27,28 +28,22 @@ class ObservationsRoutes {
     }
 
     delete(req, res, next) {
-        const index = PLANETS.findIndex(p => p.id == req.params.idPlanet); // params est une information passer dans l'url
 
-        if (index === -1) {
-            return next(HttpError.NotFound(`LA planète avec l'identifiant ${req.params.idPlanet} n'existe pas`))
-        } else {
-            PLANETS.splice(index, 1);
+        return next(HttpError.MethodNotAllowed());
 
-            res.status(204).end();
-        }
     }
 
     async post(req, res, next) {
-        const newPlanet = req.body;
+        const newObservation = req.body;
 
         try {
-            let planetAdded = await planetRepository.create(newPlanet);
-            planetAdded = planetAdded.toObject({ getters: false, virtuals: false });
-            planetAdded = planetRepository.transform(planetAdded);
+            let observationAdded = await observationRepository.create(newObservation);
+            observationAdded = observationAdded.toObject({ getters: false, virtuals: false });
+            observationAdded = observationRepository.transform(observationAdded);
 
 
 
-            res.status(HttpStatus.CREATED).json(planetAdded);
+            res.status(HttpStatus.CREATED).json(observationAdded);
         } catch (err) {
             return next(err);
         }
@@ -59,17 +54,89 @@ class ObservationsRoutes {
     }
 
     async getAll(req, res, next) {
-
-        //On passe pas la query
         const filter = {};
-        if (req.query.explorer) {
-            filter.discoveredBy = req.query.explorer;
+        if (req.params.stationName) {
+            filter.station = req.params.stationName;
         }
+        const transformOptions = {};
+        if (req.query.unit) {
+            const unit = req.query.unit;
+            if (unit === 'c') {
+                transformOptions.unit = unit;
+            }
+            else if (unit === 'k') {
+                transformOptions.unit = unit;
+            }
+            else if (unit === 'f') {
+                transformOptions.unit = unit;
+            }
+            else {
+                return next(HttpError.BadRequest('Le paramètre unit doit avoir la valeur c, f ou k'));
+            }
+
+        }
+        /*if (req.query.wind) {
+            const unit = req.query.wind;
+            if (wind) {
+                transformOptions.wind = wind;
+            }
+
+
+        }*/
+
+        try {
+            let observations = await observationRepository.retrieveAll(filter);
+
+            observations = observations.map(o => {
+                o = o.toObject({ getter: false, virtuals: false });
+                o = observationRepository.transform(o, transformOptions);
+                return o;
+            });
+
+            res.status(200).json(observations);
+        } catch (err) {
+            return next(err);
+        }
+
     }
 
     async getOne(req, res, next) {
-        const idPlanet = req.params.idPlanet;
+        const idObservation = req.params.idObservation;
 
+        const transformOptions = {};
+        if (req.query.unit) {
+            const unit = req.query.unit;
+            if (unit === 'c') {
+                transformOptions.unit = unit;
+            }
+            else if (unit === 'k') {
+                transformOptions.unit = unit;
+            }
+            else if (unit === 'f') {
+                transformOptions.unit = unit;
+            }
+            else {
+                return next(HttpError.BadRequest('Le paramètre unit doit avoir la valeur c, f ou k'));
+            }
+
+        }
+
+        try {
+            let observation = await observationRepository.retrieveById(idObservation);
+            //1.  J'ai une planete
+            if (observation) {
+                console.log("MARCO");
+                observation = observation.toObject({ getters: false, virtuals: false });
+                observation = observationRepository.transform(observation, transformOptions);
+                res.status(200).json(observation);
+            }
+            else {
+
+                return next(HttpError.NotFound(`La station d'observation: ${idObservation} n'existe pas`));
+            }
+        } catch (err) {
+            return next(err);
+        }
     }
 
 

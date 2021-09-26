@@ -139,10 +139,7 @@ class PlanetsRoutes {
         } catch (err) {
             return next(err);
         }
-        //2. pas de planete
-        // if (!planet) {
 
-        //  }
 
     }
 }
