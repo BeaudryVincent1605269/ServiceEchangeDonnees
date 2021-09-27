@@ -31,8 +31,29 @@ class ObservationRepository {
                 observation.feelslike = observation.feelslike - ZERO_FAHRENHEIT;
             }
         }
-        if (observation.wind.speed) {
-
+        if (observation.wind.degree >= 337.5 && observation.wind.degree < 22.5) {
+            observation.wind.direction = 'N';
+        }
+        else if (observation.wind.degree >= 22.5 && observation.wind.degree < 67.5) {
+            observation.wind.direction = 'NE';
+        }
+        else if (observation.wind.degree >= 67.5 && observation.wind.degree < 112.5) {
+            observation.wind.direction = 'E';
+        }
+        else if (observation.wind.degree >= 112.5 && observation.wind.degree < 157.5) {
+            observation.wind.direction = 'SE';
+        }
+        else if (observation.wind.degree >= 157.5 && observation.wind.degree < 202.5) {
+            observation.wind.direction = 'S';
+        }
+        else if (observation.wind.degree >= 202.5 && observation.wind.degree < 247.5) {
+            observation.wind.direction = 'SW';
+        }
+        else if (observation.wind.degree >= 247.5 && observation.wind.degree < 292.5) {
+            observation.wind.direction = 'W';
+        }
+        else if (observation.wind.degree >= 292.5 && observation.wind.degree < 337.5) {
+            observation.wind.direction = 'NW';
         }
 
 

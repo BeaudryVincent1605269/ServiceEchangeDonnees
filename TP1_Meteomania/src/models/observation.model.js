@@ -5,8 +5,8 @@ const observationSchema = mongoose.Schema({
     location: {
         station: { type: String, unique: true, require: true },
         coord: {
-            lon: {type: Number, min: -1000, max: 1000, required: true },
-            lat: {type: Number, min: -1000, max: 1000, required: true }
+            lon: { type: Number, min: -1000, max: 1000, required: true },
+            lat: { type: Number, min: -1000, max: 1000, required: true }
         }
 
 
@@ -28,7 +28,7 @@ const observationSchema = mongoose.Schema({
     observationDate: Date,
     hexMatrix: [String, String, String, String, String]
 
-},{
+}, {
     collection: 'observations',
     strict: 'throw',
 

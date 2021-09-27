@@ -123,9 +123,9 @@ class ObservationsRoutes {
 
         try {
             let observation = await observationRepository.retrieveById(idObservation);
-            //1.  J'ai une planete
+
             if (observation) {
-                console.log("MARCO");
+
                 observation = observation.toObject({ getters: false, virtuals: false });
                 observation = observationRepository.transform(observation, transformOptions);
                 res.status(200).json(observation);
