@@ -1,6 +1,7 @@
 import express from 'express';
 import HttpError from 'http-errors';
 import HttpStatus from 'http-status';
+import planets from '../data/planets.js';
 import PLANETS from '../data/planets.js';
 
 import planetRepository from '../repositories/planet.repository.js';
@@ -17,28 +18,48 @@ class PlanetsRoutes {
         router.put('/:idPlanet', this.put);
     }
 
-    patch(req, res, next) {
-        return next(HttpError.NotImplemented());
+    async patch(req, res, next) {
+        try {
+            let planet = await planetRepository.update(req.params.idPlanet, req.body);
+            if (!planet) {
+                return next(HttpError.NotFound(`La planete avec l'id ${req.params.idPlanet} n'existe pas`));
+            }
+
+            planet = planet.toObject({ getters: false, virtuals: false });
+            planet = planetRepository.transform(planet);
+
+            res.status(200).json(planet)
+        } catch (err) {
+            return next(err);
+        }
     }
 
     put(req, res, next) {
         return next(HttpError.MethodNotAllowed());
     }
 
-    delete(req, res, next) {
-        const index = PLANETS.findIndex(p => p.id == req.params.idPlanet); // params est une information passer dans l'url
-
-        if (index === -1) {
-            return next(HttpError.NotFound(`LA planète avec l'identifiant ${req.params.idPlanet} n'existe pas`))
-        } else {
-            PLANETS.splice(index, 1);
-
+    async delete(req, res, next) {
+        try {
+            const deleteResult = await planetRepository.delete(req.params.idPlanet);
+            if (!deleteResult) {
+                return next(HttpError.NotFound(`La planete avec l'id ${req.params.idPlanet} n'existe pas`));
+            }
             res.status(204).end();
+
+
+        } catch {
+            return next(err);
         }
     }
 
     async post(req, res, next) {
         const newPlanet = req.body;
+
+
+        if (Object.keys(newPlanet).length() === 0) {
+            return next(HttpError.BadRequest('El planeta no mucho conteno donnato'));
+        }
+
 
         try {
             let planetAdded = await planetRepository.create(newPlanet);

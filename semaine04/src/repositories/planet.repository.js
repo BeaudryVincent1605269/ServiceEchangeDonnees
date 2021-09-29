@@ -1,8 +1,20 @@
 import Planet from '../models/planet.model.js';
+import objectToDotNotation from '../libs/database/objectToDotNotation.js';
 
 const ZERO_KELVIN = -273.15;
 
 class PlanetRepository {
+
+    delete(idPlanet) {
+        return Planet.findByIdAndDelete(idPlanet);
+    }
+    // put , patch
+    update(idPlanet, planetModifs) {
+
+        const planetToDotNotation = objectToDotNotation(planetModifs);
+        return Planet.findByIdAndUpdate(idPlanet, planetToDotNotation, { new: true });
+
+    }
 
     retrieveById(idPlanet) {
         return Planet.findById(idPlanet);
@@ -40,6 +52,19 @@ class PlanetRepository {
                 planet.temperature = parseFloat(planet.temperature.toFixed(2)); // Pour 2 chiffre apres la virgule
             }
         }
+
+        planet.discoveredDate = dayjs(planet.discoveredDate).format('YYYY-MM-DD');
+
+        planet.lightspeed = `${planet.position.x.toString(16)}@${planet.position.y.toString(16)}#${planet.position.z.toString(16)}`;
+
+
+
+        // observation.hex = {
+        //     alpha:0,
+        //     beta:1,
+        //     gamma:0,
+        //     delta:0
+        // }
 
         delete planet.__v;
 
