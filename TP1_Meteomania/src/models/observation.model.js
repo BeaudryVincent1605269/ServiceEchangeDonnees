@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const observationSchema = mongoose.Schema({
 
     location: {
-        station: { type: String, unique: true, require: true },
+        station: { type: String, unique: true, require: true, index: true },
         coord: {
             lon: { type: Number, min: -1000, max: 1000, required: true },
             lat: { type: Number, min: -1000, max: 1000, required: true }

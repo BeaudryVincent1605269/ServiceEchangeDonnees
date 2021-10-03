@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import Observation from '../models/observation.model.js';
 
 const ZERO_KELVIN = -273.15;
@@ -7,6 +8,7 @@ class ObservationRepository {
 
     retrieveAll(filter) {
         return Observation.find({ "location.station": filter.station });
+        // { "location.station": filter.station }
     }
 
     retrieveById(idObservation) {
@@ -28,7 +30,9 @@ class ObservationRepository {
             }
             if (transformOptions.unit === 'f') {
                 observation.temperature = observation.temperature - ZERO_FAHRENHEIT;
+                observation.temperature = parseFloat(observation.temperature.toFixed(2));
                 observation.feelslike = observation.feelslike - ZERO_FAHRENHEIT;
+                observation.feelslike = parseFloat(observation.temperature.toFixed(2));
             }
         }
         if (observation.wind.degree >= 337.5 && observation.wind.degree < 22.5) {
@@ -56,6 +60,22 @@ class ObservationRepository {
             observation.wind.direction = 'NW';
         }
 
+        observation.observationDate = dayjs(observation.observationDate).format('YYYY-MM-DD');
+
+        // Méthode trouvé sur l'internet :
+        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt
+        let a = parseInt(observation.hexMatrix[0], 16);
+        let b = parseInt(observation.hexMatrix[0], 16);
+        let c = parseInt(observation.hexMatrix[0], 16);
+        let d = parseInt(observation.hexMatrix[0], 16);
+        let e = parseInt(observation.hexMatrix[0], 16);
+
+        observation.hex = {};
+
+        observation.hex.alpha = a + b + c + d + e;
+        observation.hex.beta = a * b * c * d * e;
+        observation.hex.gamma = observation.hex.beta / observation.hex.alpha;
+        observation.hex.delta = observation.hex.beta % observation.hex.alpha;
 
 
         return observation;

@@ -56,7 +56,7 @@ class PlanetsRoutes {
         const newPlanet = req.body;
 
 
-        if (Object.keys(newPlanet).length() === 0) {
+        if (Object.keys(newPlanet).length === 0) {
             return next(HttpError.BadRequest('El planeta no mucho conteno donnato'));
         }
 
