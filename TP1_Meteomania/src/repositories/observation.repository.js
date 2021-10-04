@@ -7,8 +7,9 @@ const ZERO_FAHRENHEIT = -459.67;
 class ObservationRepository {
 
     retrieveAll(filter) {
-        return Observation.find({ "location.station": filter.station });
-        // { "location.station": filter.station }
+
+        return Observation.find(filter.station ? { 'location.station': filter.station } : {});
+
     }
 
     retrieveById(idObservation) {
@@ -77,6 +78,7 @@ class ObservationRepository {
         observation.hex.gamma = observation.hex.beta / observation.hex.alpha;
         observation.hex.delta = observation.hex.beta % observation.hex.alpha;
 
+        delete observation.hexMatrix;
 
         return observation;
     }

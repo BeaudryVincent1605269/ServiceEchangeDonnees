@@ -1,7 +1,7 @@
 [
     {
         "location": {
-            "sation": "MARCOEX",
+            "station": "MARCOEX",
             "coord": {
                 "lon": -222.55,
                 "lat": 35.35
@@ -30,7 +30,7 @@
     },
     {
         "location": {
-            "sation": "CEDKOOL",
+            "station": "CEDKOOL",
             "coord": {
                 "lon": 555.55,
                 "lat": -65.35
@@ -59,7 +59,7 @@
     },
     {
         "location": {
-            "sation": "MIKCOMMIT",
+            "station": "MIKCOMMIT",
             "coord": {
                 "lon": -922.69,
                 "lat": -759.95
@@ -88,7 +88,7 @@
     },
     {
         "location": {
-            "sation": "BENNUAGEUX",
+            "station": "BENNUAGEUX",
             "coord": {
                 "lon": 662.69,
                 "lat": -119.95
@@ -117,7 +117,7 @@
     },
     {
         "location": {
-            "sation": "LETPEST",
+            "station": "LETPEST",
             "coord": {
                 "lon": 92.69,
                 "lat": -59.95
@@ -146,7 +146,7 @@
     },
     {
         "location": {
-            "sation": "PINGUINO",
+            "station": "PINGUINO",
             "coord": {
                 "lon": 22.69,
                 "lat": -959.55
@@ -175,7 +175,7 @@
     },
     {
         "location": {
-            "sation": "CSHARP",
+            "station": "CSHARP",
             "coord": {
                 "lon": 123.45,
                 "lat": -987.65
@@ -204,7 +204,7 @@
     },
     {
         "location": {
-            "sation": "KAMEHAMEHA",
+            "station": "KAMEHAMEHA",
             "coord": {
                 "lon": -22.60,
                 "lat": 759.95
@@ -233,7 +233,7 @@
     },
     {
         "location": {
-            "sation": "POGO59",
+            "station": "POGO59",
             "coord": {
                 "lon": -2.69,
                 "lat": 959.95
@@ -262,7 +262,7 @@
     },
     {
         "location": {
-            "sation": "HELLOWORLD",
+            "station": "HELLOWORLD",
             "coord": {
                 "lon": 900.69,
                 "lat": -500.95
