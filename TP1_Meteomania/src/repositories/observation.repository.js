@@ -37,9 +37,9 @@ class ObservationRepository {
 
             }
             if (transformOptions.unit === 'f') {
-                observation.temperature = observation.temperature - ZERO_FAHRENHEIT;
+                observation.temperature = observation.temperature += ZERO_FAHRENHEIT;
                 observation.temperature = parseFloat(observation.temperature.toFixed(2));
-                observation.feelslike = observation.feelslike - ZERO_FAHRENHEIT;
+                observation.feelslike = observation.feelslike += ZERO_FAHRENHEIT;
                 observation.feelslike = parseFloat(observation.temperature.toFixed(2));
             }
         }
