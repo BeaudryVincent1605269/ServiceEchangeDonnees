@@ -69,13 +69,14 @@ class ObservationsRoutes {
         if (req.params.stationName) {
             filter.station = req.params.stationName;
         }
+
         const transformOptions = {};
         if (req.query.unit) {
             const unit = req.query.unit;
-            if (unit === 'c') {
+            if (unit === 'm') {
                 transformOptions.unit = unit;
             }
-            else if (unit === 'k') {
+            else if (unit === 's') {
                 transformOptions.unit = unit;
             }
             else if (unit === 'f') {
@@ -89,7 +90,10 @@ class ObservationsRoutes {
 
         try {
 
-            let observations = await observationRepository.retrieveAll(filter);
+            let observations = await observationRepository.retrieveByName(filter);
+            if (observations.length == 0) {
+                return next(HttpError.BadRequest(`La station ${req.params.stationName} n'existe pas!`));
+            }
 
             observations = observations.map(o => {
                 o = o.toObject({ getter: false, virtuals: false });
@@ -99,35 +103,37 @@ class ObservationsRoutes {
 
             res.status(200).json(observations);
         } catch (err) {
-            return next(err); // 500?
+            return next(err);
         }
 
     }
 
     async getOne(req, res, next) {
         const idObservation = req.params.idObservation;
-
+        const stationName = req.params.stationName;
         const transformOptions = {};
 
         if (req.query.unit) {
             const unit = req.query.unit;
-            if (unit === 'c') {
+            if (unit === 'm') {
                 transformOptions.unit = unit;
             }
-            else if (unit === 'k') {
+            else if (unit === 's') {
                 transformOptions.unit = unit;
             }
             else if (unit === 'f') {
                 transformOptions.unit = unit;
             }
             else {
-                return next(HttpError.BadRequest('Le paramètre unit doit avoir la valeur c, f ou k'));
+                return next(HttpError.BadRequest('Le paramètre unit doit avoir la valeur m, s ou f'));
             }
 
         }
 
         try {
-            let observation = await observationRepository.retrieveById(idObservation);
+            let observation = await observationRepository.retrieveByNameAndId(stationName, idObservation);
+
+
 
             if (observation) {
                 observation = observation.toObject({ getters: false, virtuals: false });
@@ -139,7 +145,8 @@ class ObservationsRoutes {
                 return next(HttpError.NotFound(`La station d'observation: ${idObservation} n'existe pas`));
             }
         } catch (err) {
-            return next(err); // 500 ?
+
+            return next(err);
         }
     }
 

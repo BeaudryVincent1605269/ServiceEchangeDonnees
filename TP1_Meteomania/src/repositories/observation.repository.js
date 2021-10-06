@@ -6,7 +6,7 @@ const ZERO_FAHRENHEIT = -459.67;
 
 class ObservationRepository {
 
-    retrieveAll(filter) {
+    retrieveByName(filter) {
 
         return Observation.find(filter.station ? { 'location.station': filter.station } : {});
 
@@ -16,15 +16,22 @@ class ObservationRepository {
         return Observation.findById(idObservation);
     }
 
+    retrieveByNameAndId(stationName, idObservation) {
+
+
+        return Observation.findById(idObservation).find(stationName.station);
+
+    }
+
     transform(observation, transformOptions = {}) {
         if (transformOptions) {
-            if (transformOptions.unit === 'c') {
+            if (transformOptions.unit === 'm') {
                 observation.temperature += ZERO_KELVIN;
                 observation.temperature = parseFloat(observation.temperature.toFixed(2)); // Pour 2 chiffre apres la virgule
                 observation.feelslike += ZERO_KELVIN;
                 observation.feelslike = parseFloat(observation.temperature.toFixed(2));
             }
-            if (transformOptions.unit === 'k') {
+            if (transformOptions.unit === 's') {
                 observation.temperature = observation.temperature;
                 observation.feelslike = observation.feelslike;
 
