@@ -67,7 +67,7 @@ class ObservationsRoutes {
 
 
         if (req.params.stationName) {
-            filter.station = req.params.stationName;
+            filter.station = req.params.stationName; // Va chercher ce qui est passer dans l'URL
         }
 
         const transformOptions = {};
@@ -91,6 +91,7 @@ class ObservationsRoutes {
         try {
 
             let observations = await observationRepository.retrieveByName(filter);
+            // Si le tableau est vide on envoie l'erreur
             if (observations.length == 0) {
                 return next(HttpError.BadRequest(`La station ${req.params.stationName} n'existe pas!`));
             }
