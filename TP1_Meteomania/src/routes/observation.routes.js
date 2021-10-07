@@ -83,7 +83,7 @@ class ObservationsRoutes {
                 transformOptions.unit = unit;
             }
             else {
-                return next(HttpError.BadRequest('Le paramètre unit doit avoir la valeur c, f ou k'));
+                return next(HttpError.BadRequest('Le paramètre unit doit avoir la valeur m, f ou s'));
             }
 
         }
