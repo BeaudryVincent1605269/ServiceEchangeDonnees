@@ -1,11 +1,7 @@
 const SERVICE_URL = 'https://api.andromia.science/planets/';
-
 $(document).ready(() => {
-    console.log('Pret');
     getPlanets();
 });
-
-
 async function getPlanets() {
     try {
         const response = await axios.get(SERVICE_URL);
@@ -21,14 +17,10 @@ async function getPlanets() {
         console.log(err);
     }
 }
-
-
 function displayPlanet(planet) {
     let planetHtml = '<div class="card col-2 mx-2 my-2">';
-    planetHtml += `<a href="./details.html?href=${planet.href}"><img class="card-img-top" src="${planet.icon}" alt="Image planète"/>`;
-    planetHtml += `<a href="./details.html?href=${planet.href}"><h5 class="card-title">${planet.name}</h5>`;
-
+    planetHtml += `<a href="./details.html?href=${planet.href}"> <img class="card-img-top" src="${planet.icon}" alt="Image planeto"/></a>`;
+    planetHtml += `<a href="./details.html?href=${planet.href}"><h5 class="card-title">${planet.name}</h5></a>`;
     planetHtml += '</div>';
-
     return planetHtml;
 }
