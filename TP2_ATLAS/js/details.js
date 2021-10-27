@@ -15,13 +15,49 @@ $(document).ready(() => {
     console.log(urlParams.href);
     const LIEN_MONSTRE = `${INFO_URL}/${urlParams.href}`;
     getMonstre(LIEN_MONSTRE);
-    // $('#btnAddPortal').click(() => {
-    //     addPortal();
-    // });
-    // $('#btnExtraction').click(() => {
-    //     extractPlanet();
-    //});
+    $('#btnGenerate').click(() => {
+        addSpecimen();
+    });
+    $('#btnLocation').click(() => {
+        addLocation();
+    });
+
 });
+
+async function addLocation() {
+    const ADD_LOCATION_URL = `${INFO_URL}/${urlParams.href}/locations`
+
+    const body = {
+        position: "1A2C",
+        time: "Night",
+        season: "Summer",
+        rates: "Rare"
+    };
+
+    const response = await axios.post(ADD_LOCATION_URL, body);
+    if (response.status === 201) {
+        const LOCATION = response.data;
+        displayOneSpecimens(LOCATION);
+    }
+
+}
+
+
+async function addSpecimen() {
+    const ADD_SPECIMEN_URL = `${INFO_URL}/${urlParams.href}/actions?type=generate`
+
+    const body = {};
+
+
+
+    const response = await axios.post(ADD_SPECIMEN_URL, body);
+    if (response.status === 201) {
+        const SPECIMEN = response2.data;
+        displayOneSpecimens(SPECIMEN);
+    }
+
+
+}
 
 
 
@@ -40,29 +76,37 @@ async function getMonstre(url) {
         $('#lblSpeed').html(`[${monstre.speed.min} - ${monstre.speed.max}]`);
 
 
-        // const response2 = await axios.post(url.monsters, body);
-        // const MONSTRES = response2;
-
-
-
         displaySpecimens(monstre.specimens);
     }
 
-    function displaySpecimens(monstres) {
-        monstres.forEach(m => {
-            let monstreHtml = '<tr>';
-            monstreHtml += `<td><img src="./img/affinities/${m.affinity}.png" alt="${m.affinity}" title="${m.affinity}"></td>"`;
-            monstreHtml += `<td>${m.health}</td>`;
-            monstreHtml += `<td>${m.damage}</td>`;
-            monstreHtml += `<td>${m.speed}</td>`;
-            monstreHtml += `<td>${m.critical}</td>`;
-            monstreHtml += `<td><img src="./img/affinities/${m.talents[0]}.png" alt="${m.talents[0]}" title="${m.talents[0]}">
+
+
+    function displaySpecimens(monstre) {
+
+
+        monstre.forEach(m => {
+            displayOneSpecimens(m);
+        });
+
+
+    }
+
+    function displayOneSpecimens(m) {
+
+
+        let monstreHtml = '<tr>';
+        monstreHtml += `<td><img src="./img/affinities/${m.affinity}.png" alt="${m.affinity}" title="${m.affinity}"></td>"`;
+        monstreHtml += `<td>${m.health}</td>`;
+        monstreHtml += `<td>${m.damage}</td>`;
+        monstreHtml += `<td>${m.speed}</td>`;
+        monstreHtml += `<td>${m.critical}</td>`;
+        monstreHtml += `<td><img src="./img/affinities/${m.talents[0]}.png" alt="${m.talents[0]}" title="${m.talents[0]}">
             <img src="./img/affinities/${m.talents[1]}.png" alt="${m.talents[1]}" title="${m.talents[1]}"></td>`;
-            //monstreHtml += '</tr>';
-            $('#stats tbody').append(monstreHtml);
 
 
-            kernelHtml += `<td>
+
+
+        monstreHtml += `<td>
             <img src="./img/elements/${m.kernel[0]}.png" alt="${m.kernel[0]}" title="${m.kernel[0]}" width="30" height="30">
             <img src="./img/elements/${m.kernel[1]}.png" alt="${m.kernel[1]}" title="${m.kernel[1]}" width="30" height="30">
             <img src="./img/elements/${m.kernel[2]}.png" alt="${m.kernel[2]}" title="${m.kernel[2]}" width="30" height="30">
@@ -71,45 +115,45 @@ async function getMonstre(url) {
 
 
 
-            $('#kernel tbody').append(kernelHtml);
-
-            console.log(m.hash);
-
-            // let couleur = m.hash;
-            // let tableauC = new Array();
 
 
-            // let debut = couleur.substr(0, 2);
+        console.log(m.hash);
 
-            // let groupeC = 0;
-
-            // for (let i = 0; i < couleur.length - 2; i + 6) {
-            //     tableauC[groupeC] = couleur.substring(i, i + 6);
-            //     groupeC++
-            // }
-
-            // let fin = couleur.substr(-2);
-
-            // let hashHtml = '<td>';
-            // hashHtml += '<div class="colored-hash">';
-            // hashHtml += `${debut}`;
-            // hashHtml += `<span class="block" style="background-color: #${tableauC[0]}"></span>`;
-            // hashHtml += `<span class="block" style="background-color: #${tableauC[1]}"></span>`;
-            // hashHtml += `<span class="block" style="background-color: #${tableauC[2]}"></span>`;
-            // hashHtml += `<span class="block" style="background-color: #${tableauC[3]}"></span>`;
-            // hashHtml += `<span class="block" style="background-color: #${tableauC[4]}"></span>`;
-            // hashHtml += `<span class="block" style="background-color: #${tableauC[5]}"></span>`;
-            // hashHtml += `<span class="block" style="background-color: #${tableauC[6]}"></span>`;
-            // hashHtml += `<span class="block" style="background-color: #${tableauC[7]}"></span>`;
-            // hashHtml += `<span class="block" style="background-color: #${tableauC[8]}"></span>`;
-            // hashHtml += `<span class="block" style="background-color: #${tableauC[9]}"></span>`;
-            // hashHtml += `${fin}`;
-            // hashHtml += `</div></td></tr>`;
-
-            // $('#hash tbody').append(hashHtml);
+        let couleur = m.hash;
+        let tableauC = new Array();
 
 
+        let debut = couleur.substr(0, 2);
 
-        });
+        let groupeC = 0;
+
+        for (let i = 0; i < couleur.length - 2; i + 6) {
+            tableauC[groupeC] = couleur.substring(i, i + 6);
+            groupeC++
+        }
+
+        let fin = couleur.substr(-2);
+
+        monstreHtml = '<td>';
+        monstreHtml += '<div class="colored-hash">';
+        monstreHtml += `${debut}`;
+        monstreHtml += `<span class="block" style="background-color: #${tableauC[0]}"></span>`;
+        monstreHtml += `<span class="block" style="background-color: #${tableauC[1]}"></span>`;
+        monstreHtml += `<span class="block" style="background-color: #${tableauC[2]}"></span>`;
+        monstreHtml += `<span class="block" style="background-color: #${tableauC[3]}"></span>`;
+        monstreHtml += `<span class="block" style="background-color: #${tableauC[4]}"></span>`;
+        monstreHtml += `<span class="block" style="background-color: #${tableauC[5]}"></span>`;
+        monstreHtml += `<span class="block" style="background-color: #${tableauC[6]}"></span>`;
+        monstreHtml += `<span class="block" style="background-color: #${tableauC[7]}"></span>`;
+        monstreHtml += `<span class="block" style="background-color: #${tableauC[8]}"></span>`;
+        monstreHtml += `<span class="block" style="background-color: #${tableauC[9]}"></span>`;
+        monstreHtml += `${fin}`;
+        monstreHtml += `</div></td></tr>`;
+
+        $('#stats tbody').append(monstreHtml);
+
+
+
+
     }
 }
