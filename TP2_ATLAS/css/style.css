@@ -1,0 +1,21 @@
+.btnDesign{
+  display: block;
+  width: 30%;
+  border: none;
+  background-color: #04AA6D;
+  padding: 5px 5px;
+  margin: 2px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.colored-hash .block {
+    letter-spacing: -8px;
+    display: inline-block;
+    width: 8;
+    height: 14px;
+    overflow: hidden;
+    padding: 0;
+    line-height: 1;
+}
