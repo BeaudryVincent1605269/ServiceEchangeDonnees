@@ -120,35 +120,38 @@ async function getMonstre(url) {
         console.log(m.hash);
 
         let couleur = m.hash;
-        let tableauC = new Array();
 
+        let tableauC = new Array();
 
         let debut = couleur.substr(0, 2);
 
-        let groupeC = 0;
-
-        for (let i = 0; i < couleur.length - 2; i + 6) {
-            tableauC[groupeC] = couleur.substring(i, i + 6);
-            groupeC++
-        }
-
         let fin = couleur.substr(-2);
+
+        let groupeC = 0;
 
         monstreHtml = '<td>';
         monstreHtml += '<div class="colored-hash">';
         monstreHtml += `${debut}`;
-        monstreHtml += `<span class="block" style="background-color: #${tableauC[0]}"></span>`;
-        monstreHtml += `<span class="block" style="background-color: #${tableauC[1]}"></span>`;
-        monstreHtml += `<span class="block" style="background-color: #${tableauC[2]}"></span>`;
-        monstreHtml += `<span class="block" style="background-color: #${tableauC[3]}"></span>`;
-        monstreHtml += `<span class="block" style="background-color: #${tableauC[4]}"></span>`;
-        monstreHtml += `<span class="block" style="background-color: #${tableauC[5]}"></span>`;
-        monstreHtml += `<span class="block" style="background-color: #${tableauC[6]}"></span>`;
-        monstreHtml += `<span class="block" style="background-color: #${tableauC[7]}"></span>`;
-        monstreHtml += `<span class="block" style="background-color: #${tableauC[8]}"></span>`;
-        monstreHtml += `<span class="block" style="background-color: #${tableauC[9]}"></span>`;
+        for (let i = 2; i < couleur.length - 2; i += 6) {
+            //console.log(`${i} < ${couleur.length - 2}`);
+            tableauC[groupeC] = couleur.substring(i, i + 6);
+            console.log(tableauC[groupeC]);
+            monstreHtml += `<span class="block" style="background-color:#${tableauC[groupeC]}"> </span>`;
+            groupeC++
+        }
         monstreHtml += `${fin}`;
         monstreHtml += `</div></td></tr>`;
+
+        // monstreHtml += `<span class="block" style="background-color: #${tableauC[0]}"></span>`;
+        // monstreHtml += `<span class="block" style="background-color: #${tableauC[1]}"></span>`;
+        // monstreHtml += `<span class="block" style="background-color: #${tableauC[2]}"></span>`;
+        // monstreHtml += `<span class="block" style="background-color: #${tableauC[3]}"></span>`;
+        // monstreHtml += `<span class="block" style="background-color: #${tableauC[4]}"></span>`;
+        // monstreHtml += `<span class="block" style="background-color: #${tableauC[5]}"></span>`;
+        // monstreHtml += `<span class="block" style="background-color: #${tableauC[6]}"></span>`;
+        // monstreHtml += `<span class="block" style="background-color: #${tableauC[7]}"></span>`;
+        // monstreHtml += `<span class="block" style="background-color: #${tableauC[8]}"></span>`;
+        // monstreHtml += `<span class="block" style="background-color: #${tableauC[9]}"></span>`;
 
         $('#stats tbody').append(monstreHtml);
 
