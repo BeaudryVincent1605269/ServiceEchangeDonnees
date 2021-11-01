@@ -32,7 +32,7 @@ function displayMonstre(monstre) {
      <td width="200">[${monstre.health.min} - ${monstre.health.max}]</td>
      <td width="200">[${monstre.damage.min} - ${monstre.damage.max}]</td>
      <td width="200">[${monstre.speed.min} - ${monstre.speed.max}]</td>
-     <td width="200">[${monstre.critical.min} - ${monstre.critical.max}]%</td>
+     <td width="200">[${Math.round(monstre.critical.min * 100)} - ${Math.round(monstre.critical.max * 100)}]%</td>
      </tr>`
 
 

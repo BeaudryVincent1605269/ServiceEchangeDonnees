@@ -54,7 +54,8 @@
                     <label class="col-6" id="lblCritical"></label>
                 </div>
                 <div class="row">
-                    <button id="btnLocation" class="btnDesign btn btn-success">Location</button>
+                    <button id="btnLocation" class="btnDesign btn btn-success" data-bs-toggle="modal"
+                        data-bs-target="#locationModal">Location</button>
                     <button id="btnGenerate" class="btnDesign btn btn-success">Generate</button>
                 </div>
             </div>
@@ -79,6 +80,57 @@
     </div>
 
 </body>
+<div class="modal fade" id="locationModal" tabindex="-1" aria-labelledby="locationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="locationModalLabel">Locations</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table id="location" class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Position</th>
+                            <th scope="col">Time</th>
+                            <th scope="col">Season</th>
+                            <th scope="col">Rates</th>
+                        </tr>
+                    <tbody>
+                    </tbody>
+                    </thead>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <div class="row  form-group">
+                    <input type="text" pattern="[A-Z]{1,2}[0-9]{3}" class="form-control" id="txtPosition">
+                    <select name="" id="cboTime" class="form-select">
+                        <option>Morning</option>
+                        <option>Day</option>
+                        <option>Night</option>
+                    </select>
+                    <select name="" id="cboSeason" class="form-select">
+                        <option>Spring</option>
+                        <option>Summer</option>
+                        <option>Autumn</option>
+                        <option>Winter</option>
+                    </select>
+                    <select name="" id="cboRates" class="form-select">
+                        <option>Commun</option>
+                        <option>Uncommun</option>
+                        <option>Rare</option>
+                        <option>Limited</option>
+                    </select>
+                    <button type="button" class="btn btn-secondary">Add</button>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
 
 
 </html>
