@@ -34,13 +34,14 @@ async function addLocation() {
 
 
 
-
+        console.log(specimens.locations);
         $('#location tbody').empty();
-        specimens.forEach(s => {
+        specimens.locations.forEach(s => {
             let locationHTML = '<tr>';
-            locationHTML += `<td>${s.locations.time}</td>`;
-            locationHTML += `<td><img width="50px" height="50px" src="./img/seasons/${s.locations.season}.png"></td>`;
-            locationHTML += `<td><img width="50px" height="50px" src="./img/rarities/${s.locations.rates}.png"></td>`;
+            locationHTML += `<td>${s.position}</td>`;
+            locationHTML += `<td>${s.time}</td>`;
+            locationHTML += `<td><img width="40px" height="40px" src="./img/seasons/${s.season}.png"></td>`;
+            locationHTML += `<td><img width="40px" height="40px" src="./img/rarities/${s.rates}.png"></td>`;
             locationHTML += '</tr>';
             $('#location tbody').append(locationHTML);
         });
@@ -57,9 +58,13 @@ async function addSpecimen() {
 
 
     const response = await axios.post(ADD_SPECIMEN_URL, body);
+
+
+
     if (response.status === 201) {
         const SPECIMEN = response.data;
-        displaySpecimens(SPECIMEN);
+        console.log(SPECIMEN);
+        displayOneSpecimens(SPECIMEN);
     } else {
         console.log(response);
     }
@@ -71,7 +76,7 @@ async function getMonstre(url) {
     const response = await axios.get(url);
     if (response.status === 200) {
         const monstre = response.data;
-        console.log(monstre);
+        //console.log(monstre);
         document.title = monstre.name;
         $('#imgIcon').attr('src', monstre.assets);
         $('#lblMonsterName').html(monstre.name);
@@ -110,17 +115,12 @@ async function getMonstre(url) {
             <img src="./img/affinities/${s.talents[1]}.png" alt="${s.talents[1]}" title="${s.talents[1]}"></td>`;
 
 
-
-
         monstreHtml += `<td>
             <img src="./img/elements/${s.kernel[0]}.png" alt="${s.kernel[0]}" title="${s.kernel[0]}" width="30" height="30">
             <img src="./img/elements/${s.kernel[1]}.png" alt="${s.kernel[1]}" title="${s.kernel[1]}" width="30" height="30">
             <img src="./img/elements/${s.kernel[2]}.png" alt="${s.kernel[2]}" title="${s.kernel[2]}" width="30" height="30">
             <img src="./img/elements/${s.kernel[3]}.png" alt="${s.kernel[3]}" title="${s.kernel[3]}" width="30" height="30">
             <img src="./img/elements/${s.kernel[4]}.png" alt="${s.kernel[4]}" title="${s.kernel[4]}" width="30" height="30"></td>`;
-
-
-
 
 
         //console.log(s.hash);
