@@ -20,12 +20,46 @@ $(document).ready(() => {
         addSpecimen();
     });
     $('#btnLocation').click(() => {
-        addLocation();
+        seeLocation();
+    });
+    $('#btnAdd').click(() => {
+        addNewLocation();
     });
 
 });
 
-async function addLocation() {
+
+
+async function addNewLocation() {
+
+    const ADD_LOCATION_URL = `${INFO_URL}/${urlParams.href}/locations`;
+
+
+    const position = $('#txtPosition').val();
+    const time = $('#cboTime').val();
+    const season = $('#cboSeason').val();
+    const rates = $('#cboRates').val();
+
+    const body = {
+        position: position,
+        time: time,
+        season: season,
+        rates: rates
+    };
+
+
+    const response = await axios.post(ADD_LOCATION_URL, body);
+    if (response.status === 201) {
+        const locations = [response.data];
+        seeLocation(locations);
+    } else {
+        console.log(response);
+    }
+
+
+}
+
+async function seeLocation() {
     const LOCATION_URL = `${INFO_URL}/${urlParams.href}`;
     const response = await axios.get(LOCATION_URL);
 
