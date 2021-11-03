@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 
 const ZERO_KELVIN = -273.15;
 class PlanetRepository {
-    
+
     retrieveById(idPlanet) {
         return Planet.findById(idPlanet);
     }
@@ -16,7 +16,7 @@ class PlanetRepository {
     update(idPlanet, planetModifs) {
 
         const planetToDotNotation = objectToDotNotation(planetModifs);
-        return Planet.findByIdAndUpdate(idPlanet, planetToDotNotation, {new:true});
+        return Planet.findByIdAndUpdate(idPlanet, planetToDotNotation, { new: true });
 
     }
 
@@ -29,18 +29,22 @@ class PlanetRepository {
     }
 
     transform(planet, transformOptions = {}) {
-        if(transformOptions) {
-            if(transformOptions.unit === 'c') {
+        if (transformOptions) {
+            if (transformOptions.unit === 'c') {
                 planet.temperature += ZERO_KELVIN;
                 planet.temperature = parseFloat(planet.temperature.toFixed(2));
             }
         }
 
+
+        //planet.href = `/planets/${planet._id}`;
+        planet.href = `${process.env.BASE_URL}/planets/${planet._id}`;
         planet.discoveryDate = dayjs(planet.discoveryDate).format('YYYY-MM-DD');
 
-        planet.lightspeed = 
+        planet.lightspeed =
             `${planet.position.x.toString(16)}@${planet.position.y.toString(16)}#${planet.position.z.toString(16)}`;
 
+        delete planet.__id;
         delete planet.__v;
 
 
