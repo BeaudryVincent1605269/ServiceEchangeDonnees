@@ -32,6 +32,16 @@ class ExplorationsRoutes {
 
             const pageCount = Math.ceil(documentsCount / req.query.limit);
             const hasNextPage = (paginate.hasNextPages(req))(pageCount);
+
+            // const hasNextPageFunction = paginate.hasNextPages(req);
+            // console.log(hasNextPageFunction);
+            // const hasNextPage = hasNextPageFunction(pageCount);
+            // console.log(hasNextPage);
+
+
+
+
+
             const pageArray = paginate.getArrayPages(req)(3, pageCount, req.query.page);
 
             //console.log(pageArray);

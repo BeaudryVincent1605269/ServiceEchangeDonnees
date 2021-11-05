@@ -45,6 +45,9 @@ class PlanetRepository {
             if (transformOptions.embed && transformOptions.embed.explorations) {
                 planet.explorations = planet.explorations.map(e => {
                     e = explorationsRepository.transform(e, transformOptions)
+
+                    return e;
+
                 });
             }
         }
@@ -57,7 +60,7 @@ class PlanetRepository {
         planet.lightspeed =
             `${planet.position.x.toString(16)}@${planet.position.y.toString(16)}#${planet.position.z.toString(16)}`;
 
-        delete planet.__id;
+        delete planet._id;
         delete planet.__v;
 
 

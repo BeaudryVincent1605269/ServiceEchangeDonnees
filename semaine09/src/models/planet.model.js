@@ -17,7 +17,7 @@ const planetSchema = mongoose.Schema({
 });
 
 planetSchema.virtual('explorations', {
-  ref: 'Explorations',
+  ref: 'Exploration',
   foreignField: 'planet',
   localField: '_id',
   justOne: false
