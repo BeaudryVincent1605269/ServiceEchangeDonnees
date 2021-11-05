@@ -34,7 +34,6 @@ class ExplorationsRepository {
         if (transformOptions.embed && transformOptions.embed.planet) {
             exploration.planet = planetRepository.transform(exploration.planet, transformOptions);
         } else {
-
             exploration.planet = { href: `${process.env.BASE_URL}/planets/${exploration.planet}` };
         }
 
